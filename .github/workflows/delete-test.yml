@@ -37,3 +37,6 @@ jobs:
           K8_API_TOKEN: ${{ secrets.K8_API_TOKEN }}
         run: |
           echo $BRANCH
+          echo $GITHUB_REF
+          echo $GITHUB_HEAD_REF
+          echo ${{ github }}
