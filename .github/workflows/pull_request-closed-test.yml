@@ -1,7 +1,7 @@
 name: "Manual/Auto: pull_request test"
 on:
   pull_request:
-  types: [closed]
+    types: [closed]
   workflow_dispatch:
     inputs:
       branch-name:
