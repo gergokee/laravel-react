@@ -6,11 +6,8 @@ on:
       branch-name:
         description: 'Type in input'
 
-env:
-  IMAGE_NAME: mycall-frontend
-
 jobs:
-  cleanup-pr-deploy:
+  test:
     runs-on: ubuntu-18.04
     steps:
       - name: Echo variables
