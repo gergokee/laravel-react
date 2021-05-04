@@ -18,6 +18,7 @@ jobs:
           echo "github.event.ref:" ${{ github.event.ref }}
           echo "GITHUB_REF:" $GITHUB_REF
           echo "GITHUB_HEAD_REF:" $GITHUB_HEAD_REF
+          echo "GITHUB_REF#refs/heads/": ${GITHUB_REF#refs/heads/}
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
