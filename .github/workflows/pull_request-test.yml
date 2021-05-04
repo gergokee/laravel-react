@@ -10,6 +10,11 @@ jobs:
   test:
     runs-on: ubuntu-18.04
     steps:
+      - name: Checkout local actions
+        uses: actions/checkout@v2
+        with:
+          # We need to fetch with a depth of 2 for pull_request so we can do HEAD^2
+          fetch-depth: 2
       - name: Echo variables
         id: echo-vars
         shell: bash
