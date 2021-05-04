@@ -1,0 +1,21 @@
+name: "Manual/Auto: pull_request test"
+on:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      branch-name:
+        description: 'Type in input'
+
+jobs:
+  test:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Echo variables
+        id: echo-vars
+        shell: bash
+        run: |
+          echo ${{ github.event.inputs.branch-name }}
+          echo ${{ github.event.ref }}
+          echo $GITHUB_REF
+          echo $GITHUB_HEAD_REF
+          echo ${{ github }}
