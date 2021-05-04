@@ -1,0 +1,24 @@
+name: "Manual/Auto: push test"
+on:
+  push:
+  workflow_dispatch:
+    inputs:
+      branch-name:
+        description: 'Type in input'
+
+env:
+  IMAGE_NAME: mycall-frontend
+
+jobs:
+  cleanup-pr-deploy:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Echo variables
+        id: echo-vars
+        shell: bash
+        run: |
+          echo ${{ github.event.inputs.branch-name }}
+          echo ${{ github.event.ref }}
+          echo $GITHUB_REF
+          echo $GITHUB_HEAD_REF
+          echo ${{ github }}
