@@ -20,7 +20,7 @@ jobs:
         shell: bash
         run: |
           echo "github.event.inputs.branch-name:" ${{ github.event.inputs.branch-name }}
-          echo "github.event.ref:" ${{ github.event.ref }}
+          echo "github.event.ref:" ${{ github.event.ref#refs/heads/ }}
           echo "GITHUB_REF:" $GITHUB_REF
           echo "GITHUB_HEAD_REF:" $GITHUB_HEAD_REF
           echo "GITHUB_REF#refs/heads/": ${GITHUB_REF#refs/heads/}
