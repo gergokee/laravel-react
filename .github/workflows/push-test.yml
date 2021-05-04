@@ -14,8 +14,12 @@ jobs:
         id: echo-vars
         shell: bash
         run: |
-          echo ${{ github.event.inputs.branch-name }}
-          echo ${{ github.event.ref }}
-          echo $GITHUB_REF
-          echo $GITHUB_HEAD_REF
-          echo ${{ github }}
+          echo "github.event.inputs.branch-name:" ${{ github.event.inputs.branch-name }}
+          echo "github.event.ref:" ${{ github.event.ref }}
+          echo "$GITHUB_REF:" $GITHUB_REF
+          echo "$GITHUB_HEAD_REF:" $GITHUB_HEAD_REF
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: |
+          echo "$GITHUB_CONTEXT"
