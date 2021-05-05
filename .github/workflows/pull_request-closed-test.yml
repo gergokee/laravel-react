@@ -28,7 +28,7 @@ jobs:
         uses: ./.github/actions/ocmc/push-action
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
+          branch: $GITHUB_HEAD_REF
       - name: Echo variables
         id: echo-vars
         shell: bash
