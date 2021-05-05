@@ -18,6 +18,10 @@ jobs:
       - name: Create local changes
         run: |
           cp ./.github/templates/test/a.txt ./.github/templates/test1/a.txt
+      - name: "Get pull pull_request branch name"
+        id: get-branch-name
+        run: |
+          echo "::set-output name=branch::$GITHUB_HEAD_REF"
       - name: Commit files
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -27,7 +31,7 @@ jobs:
         uses: ./.github/actions/ocmc/push-action
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{GITHUB_HEAD_REF}}
+          branch: ${{ steps.get-branch-name.outputs.branch }}
       - name: Echo variables
         id: echo-vars
         shell: bash
