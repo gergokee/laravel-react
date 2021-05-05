@@ -11,24 +11,6 @@ jobs:
   test:
     runs-on: ubuntu-18.04
     steps:
-      - name: Checkout local actions
-        uses: actions/checkout@v2
-        with:
-          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
-          fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
-      - name: Create local changes
-        run: |
-          cp ./.github/templates/test/a.txt ./.github/templates/test1/a.txt
-      - name: Commit files
-        run: |
-          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git diff-index --quiet HEAD || git commit -m "Reset templates" -a
-      - name: Push changes
-        uses: ./.github/actions/ocmc/push-action
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${GITHUB_HEAD_REF}
       - name: Echo variables
         id: echo-vars
         shell: bash
