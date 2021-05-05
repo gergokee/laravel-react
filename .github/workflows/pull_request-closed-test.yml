@@ -16,6 +16,10 @@ jobs:
         with:
           persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
           fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
+      - name: "Get branch name from pull request"
+        id: get-branch-name
+        run: |
+          echo "::set-output name=branch::$GITHUB_HEAD_REF"
       - name: Create local changes
         run: |
           cp ./.github/templates/test/a.txt ./.github/templates/test1/a.txt
@@ -28,7 +32,7 @@ jobs:
         uses: ./.github/actions/ocmc/push-action
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${GITHUB_HEAD_REF}
+          branch: ${{ steps.get-branch-name.outputs.branch }}
       - name: Echo variables
         id: echo-vars
         shell: bash
