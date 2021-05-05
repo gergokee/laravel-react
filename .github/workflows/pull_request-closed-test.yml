@@ -21,8 +21,8 @@ jobs:
           cp ./.github/templates/test/a.txt ./.github/templates/test1/a.txt
       - name: Commit files
         run: |
-          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
+          git config --local user.email "${{ github.event.pull_request.user.login }}@users.noreply.github.com"
+          git config --local user.name "${{ github.event.pull_request.user.login }}"
           git diff-index --quiet HEAD || git commit -m "Reset templates" -a
       - name: Push changes
         uses: ./.github/actions/ocmc/push-action
