@@ -24,7 +24,7 @@ jobs:
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git update-index --refresh
-          git diff-index --quiet HEAD -- || git commit -m "Reset templates" -a
+          git diff-index --quiet HEAD -- && git commit -m "Reset templates" -a
       - name: Push changes
         uses: ./.github/actions/ocmc/push-action
         with:
