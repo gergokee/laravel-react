@@ -28,7 +28,7 @@ jobs:
         id: get-env-urls
         shell: bash
         run: |
-          if [[ "${{ github.event.inputs.brand }}" == *"adidas"* ]] && [[ "${{ github.event.inputs.brand }}" == *"nike"* ]]
+          if [[ "${{ github.event.inputs.brand }}" == *"adidas"* && "${{ github.event.inputs.brand }}" == *"nike"* ]]
           then
               ENV_URLS="sg"
           elif [[ "${{ github.event.inputs.brand }}" == *"adidas"* ]]
