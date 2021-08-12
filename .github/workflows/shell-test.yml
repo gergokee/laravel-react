@@ -31,10 +31,10 @@ jobs:
           if [[ "${{ github.event.inputs.brand }}" == *"adidas"* ]] && [[ "${{ github.event.inputs.brand }}" == *"nike"* ]]
           then
               ENV_URLS="sg"
-          elif [[ ${{ github.event.inputs.brand }} == *"adidas"* ]]
+          elif [[ "${{ github.event.inputs.brand }}" == *"adidas"* ]]
           then
               ENV_URLS="sg2"
-          elif [[ ${{ github.event.inputs.brand }} == *"nike"* ]]
+          elif [[ "${{ github.event.inputs.brand }}" == *"nike"* ]]
           then
               ENV_URLS="sg3"
           fi
