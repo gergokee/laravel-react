@@ -1,0 +1,83 @@
+# This is a basic workflow
+
+name: Basic wf nr.3.
+
+on:
+  push:
+  workflow_dispatch:
+    inputs:
+      name:
+        required: true
+
+jobs:
+  build-frontend:
+    runs-on: ubuntu-latest
+    steps:
+    - name: build frontend
+      run: echo "Built"
+
+  build-backend:
+    runs-on: ubuntu-latest
+    steps:
+    - name: build backend
+      run: echo "Built"
+
+  frontend-code-test:
+    runs-on: ubuntu-latest
+    needs: build-frontend
+    steps:
+    - name: TEST1
+      run: echo "All tests ok"
+
+  backend-code-test:
+    runs-on: ubuntu-latest
+    needs: build-backend
+    steps:
+    - name: TEST1
+      run: echo "All tests ok"
+
+  deploy-to-stage:
+    runs-on: ubuntu-latest
+    environment: 
+      name: stage
+      url: "https://stage.example.com"
+    needs: [frontend-code-test,backend-code-test]
+    steps:
+    - name: Stage deployment
+      run: echo "Success"
+
+  test-stage:
+    runs-on: ubuntu-latest
+    needs: deploy-to-stage
+    steps:
+    - name: STAGE TEST
+      run: echo "All tests ok"
+
+  deploy-to-test:
+    runs-on: ubuntu-latest
+    environment: 
+      name: test
+      url: "https://test.example.com"
+    needs: test-stage
+    steps:
+    - name: Test deployment
+      run: |
+        sleep 20s
+        echo "Success"
+
+  deploy-to-prod:
+    runs-on: ubuntu-latest
+    environment: 
+      name: production
+      url: "https://production.example.com"
+    needs: test-stage
+    steps:
+    - name: Production deployment
+      run: echo "Success"
+  
+  post-to-slack:
+    runs-on: ubuntu-latest
+    needs: deploy-to-prod
+    steps:
+    - name: Posting to slack
+      run: echo "Success"
