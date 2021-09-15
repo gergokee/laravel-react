@@ -53,11 +53,11 @@ jobs:
     - name: STAGE TEST
       run: echo "All tests ok"
 
-  deploy-to-test:
+  deploy-to-dev:
     runs-on: ubuntu-latest
     environment: 
-      name: test
-      url: "https://test.example.com"
+      name: dev
+      url: "https://dev.example.com"
     needs: test-stage
     steps:
     - name: Test deployment
