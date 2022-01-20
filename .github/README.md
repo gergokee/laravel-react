@@ -10,7 +10,7 @@ The project is supposed to run on Node.js server which is managed by [pm2](https
 2. Run `pm2 startup` to add pm2 to add it to system startup as the user ( `${user}` = bamboo ) which runs pm2.
 3. If you wish to change default setup, modify the startup script `/etc/systemd/system/pm2-${user}.service`
 For example if you wish to change the logging directory, add the following line under `[Service]` block:
-`Environment=PM2_LOG_FILE_PATH=/var/log/pm2/pm2.log`.
+`Environment=PM2_LOG_FILE_PATH=/var/log/pm2/pm2.log`.\
 **Important:** The log directory and everything in it must be owned by `${user}`!
 4. Add pm2 to logrotate service: `/etc/logrotate.d/pm2-${user}`. See [section 3.3.](#33-pm2-logrotate-setup) for an example.
 5. Create file `/home/${user}/.pm2/ecosystem.config.js` and add your site configuration to it. See [section 3.2.](#32-pm2-ecosystemconfigjs-setup) for an example.
