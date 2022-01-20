@@ -12,7 +12,7 @@ The project is supposed to run on Node.js server which is managed by [pm2](https
 For example if you wish to change the logging directory, add the following line under `[Service]` block:
 `Environment=PM2_LOG_FILE_PATH=/var/log/pm2/pm2.log`.
 **Important:** The log directory and everything in it must be owned by ${user}!
-4. Add pm2 to logrotate service: `/etc/logrotate.d/pm2-${user}`. See [section 3.3.](#33-pm2-ecosystemconfigjs-setup) for an example.
+4. Add pm2 to logrotate service: `/etc/logrotate.d/pm2-${user}`. See [section 3.3.](#33-pm2-logrotate-setup) for an example.
 5. Create file `/home/${user}/.pm2/ecosystem.config.js` and add your site configuration to it. See [section 3.2.](#32-pm2-ecosystemconfigjs-setup) for an example.
 
 ### 1.2. pm2 file locations
@@ -28,8 +28,8 @@ For example if you wish to change the logging directory, add the following line 
 3. Add necessary site related config. See [section 3.2.](#32-pm2-ecosystemconfigjs-setup) for an example.
 4. Run `pm2 restart ecosystem.config.js` to restart pm2 with new config.
 If you don't want to restart the whole pm2, i recommend you **only** restart the added site:
- `pm2 restart ecosystem.config.js --only api-app example.org`.
-5. Run `pm2 save`
+ `pm2 restart ecosystem.config.js --only ${appName}`.
+5. Run `pm2 save` to make sure our config is saved if between server restarts.
 
 ecosystem.config.js
 * Main files location: `/home/${user}/.pm2`
@@ -38,11 +38,14 @@ ecosystem.config.js
   * Site related logs: `/var/log/pm2/sites/`
 * pm2 sites config file: `/home/${user}/.pm2/ecosystem.config.js`
 
-## 2. Useful commands and their functionality 
-* Main files location: `/home/${user}/.pm2`
-
-
-
+## 2. Useful commands and their functionality
+* Handle pm2 service: `service pm2-bamboo start/stop/restart` (easiest to run it as root)
+* Handle pm2 daemons running by ${user}: `pm2 start/stop/restart/reload/delete ecosystem.config.js`
+* Handle only one pm2 daemon running by ${user}: `pm2 start/stop/restart/reload/delete ecosystem.config.js --only ${appName}`
+* Get apps running by ${user} `pm2 status`
+* Get summary of an app running by ${user} `pm2 show [name|id]`
+* Monitor CPU and memory usage by apps running by ${user} `pm2 monitor`
+* Monitor CPU and memory usage by apps running by ${user} `pm2 monitor`
 
 ## 3. Sample example of config files
 
@@ -73,7 +76,7 @@ ecosystem.config.js
 module.exports = {
     apps : [
         {
-            name            : "example.org",
+            name            : "${appName}",
             script          : "/bin/npx",
             args            : "next start -p 3000",
             cwd             : "/var/www/example.org",
