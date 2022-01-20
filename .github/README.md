@@ -20,7 +20,8 @@ For example if you wish to change the logging directory, add the following line 
 2. Edit pm2 sites config file: `/home/${user}/.pm2/ecosystem.config.js`
 3. Add necessary site related config. See [section 3.2.](#32-pm2-ecosystemconfigjs-setup) for an example.
 4. Run `pm2 restart ecosystem.config.js` to restart pm2 with new config.\
-If you don't want to restart the whole pm2, i recommend you **only** restart the added site: `pm2 restart ecosystem.config.js --only ${appName}`.
+If you don't want to restart the whole pm2, i recommend you **only** restart the added site:\
+`pm2 restart ecosystem.config.js --only ${appName}`.
 5. Run `pm2 save` to make sure our config is saved if between server restarts.
 
 ecosystem.config.js
@@ -38,13 +39,20 @@ ecosystem.config.js
 * pm2 sites config file: `/home/${user}/.pm2/ecosystem.config.js`
 
 ## 2. Useful commands and their functionality
-* Handle pm2 service: `service pm2-bamboo start/stop/restart` (easiest to run it as root)
-* Handle pm2 daemons running by `${user}`: `pm2 start/stop/restart/reload/delete ecosystem.config.js`
-* Handle only one pm2 daemon running by `${user}`: `pm2 start/stop/restart/reload/delete ecosystem.config.js --only ${appName}`
-* Get apps running by `${user}` `pm2 status`
-* Get summary of an app running by `${user}` `pm2 show [name|id]`
-* Monitor CPU and memory usage by apps running by `${user}` `pm2 monitor`
-* Monitor CPU and memory usage by apps running by `${user}` `pm2 monitor`
+* Handle pm2 service (easiest to run it as root):\
+`service pm2-bamboo start/stop/restart`
+* Handle pm2 daemons running by `${user}`:\
+`pm2 start/stop/restart/reload/delete ecosystem.config.js`
+* Handle only one pm2 daemon running by `${user}`:\
+`pm2 start/stop/restart/reload/delete ecosystem.config.js --only ${appName}`
+* Get apps running by `${user}`:\
+`pm2 status`
+* Get summary of an app running by `${user}`:\
+`pm2 show [name|id]`
+* Monitor CPU and memory usage by apps running by `${user}`:\
+`pm2 monitor`
+* Monitor CPU and memory usage by apps running by `${user}`:\
+`pm2 monitor`
 
 ## 3. Sample example of config files
 
