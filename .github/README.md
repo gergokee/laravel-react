@@ -15,14 +15,7 @@ For example if you wish to change the logging directory, add the following line 
 4. Add pm2 to logrotate service: `/etc/logrotate.d/pm2-${user}`. See [section 3.3.](#33-pm2-logrotate-setup) for an example.
 5. Create file `/home/${user}/.pm2/ecosystem.config.js` and add your site configuration to it. See [section 3.2.](#32-pm2-ecosystemconfigjs-setup) for an example.
 
-### 1.2. pm2 file locations
-* Main files location: `/home/${user}/.pm2`
-* Logs
-  * Main log: `/var/log/pm2/`
-  * Site related logs: `/var/log/pm2/sites/`
-* pm2 sites config file: `/home/${user}/.pm2/ecosystem.config.js`
-
-### 1.3. Add a new site to pm2
+### 1.2. Add a new site to pm2
 1. sudo to ${user}
 2. Edit pm2 sites config file: `/home/${user}/.pm2/ecosystem.config.js`
 3. Add necessary site related config. See [section 3.2.](#32-pm2-ecosystemconfigjs-setup) for an example.
@@ -32,6 +25,13 @@ If you don't want to restart the whole pm2, i recommend you **only** restart the
 5. Run `pm2 save` to make sure our config is saved if between server restarts.
 
 ecosystem.config.js
+* Main files location: `/home/${user}/.pm2`
+* Logs
+  * Main log: `/var/log/pm2/`
+  * Site related logs: `/var/log/pm2/sites/`
+* pm2 sites config file: `/home/${user}/.pm2/ecosystem.config.js`
+
+### 1.3. pm2 file locations
 * Main files location: `/home/${user}/.pm2`
 * Logs
   * Main log: `/var/log/pm2/`
