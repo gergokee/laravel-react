@@ -1,6 +1,6 @@
 name: "Manual/Auto: delete test"
 on:
-  delete:
+  push:
   workflow_dispatch:
     inputs:
       branch-name:
