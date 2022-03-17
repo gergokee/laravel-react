@@ -1,0 +1,47 @@
+# This is a basic workflow
+
+name: Basic wf nr.2.
+
+on:
+  push:
+  workflow_dispatch:
+    inputs:
+      name:
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: TEST1
+      run: echo "Built"
+
+  code-test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    - name: TEST1
+      run: echo "All tests ok"
+    - name: TEST2
+      run: echo "All tests ok"
+
+  deploy-to-stage:
+    runs-on: ubuntu-latest
+    needs: code-test
+    steps:
+    - name: Stage deployment
+      run: echo "Success"
+
+  test-stage:
+    runs-on: ubuntu-latest
+    needs: deploy-to-stage
+    steps:
+    - name: STAGE TEST
+      run: echo "All tests ok"
+
+  deploy-to-prod:
+    runs-on: ubuntu-latest
+    needs: test-stage
+    steps:
+    - name: Production deployment
+      run: echo "Success"
