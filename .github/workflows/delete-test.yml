@@ -1,6 +1,6 @@
 name: "Manual/Auto: delete test"
 on:
-  push:
+  delete:
   workflow_dispatch:
     inputs:
       branch-name:
@@ -9,8 +9,6 @@ on:
 jobs:
   test:
     runs-on: ubuntu-18.04
-    environment: 
-      name: production
     steps:
       - name: Echo variables
         id: echo-vars
@@ -21,35 +19,8 @@ jobs:
           echo "GITHUB_REF:" $GITHUB_REF
           echo "GITHUB_HEAD_REF:" $GITHUB_HEAD_REF
           echo "GITHUB_REF#refs/heads/": ${GITHUB_REF#refs/heads/}
-          echo https://api.github.com/repos/${{ github.repository }}/environments
-          ENVIRONMENTS=$(curl --request GET --url https://api.github.com/repos/${{ github.repository }}/environments \
-          --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
-          --header 'content-type: application/json')
-          
-          echo $ENVIRONMENTS
-
-          REVIEW_PROTECTED_PROD_ENV=`echo ${ENVIRONMENTS} | jq -r '.environments[]? | select(.name == "production") | .protection_rules[]? | select(.type == "required_reviewers")'`
-          
-          echo $REVIEW_PROTECTED_PROD_ENV
-
-          if [ "$REVIEW_PROTECTED_PROD_ENV" == "" ]; then
-            exit 1;
-          fi
-
-          
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: |
           echo "$GITHUB_CONTEXT"
-  test2:
-    runs-on: ubuntu-18.04
-    outputs:
-      job_status: ${{ job.status }}
-    needs: [test]
-    steps:
-      - name: Echo variables
-        shell: bash
-        run: |
-          echo "Running"
-         
