@@ -9,6 +9,8 @@ on:
 jobs:
   test:
     runs-on: ubuntu-18.04
+    environment: 
+      name: stage
     steps:
       - name: Echo variables
         id: echo-vars
