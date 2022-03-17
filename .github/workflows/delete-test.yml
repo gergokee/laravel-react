@@ -30,7 +30,7 @@ jobs:
           
           echo $REVIEW_PROTECTED_PROD_ENV
 
-          if [ "$REVIEW_PROTECTED_PROD_ENVG" == "" ]; then
+          if [ "$REVIEW_PROTECTED_PROD_ENV" == "" ]; then
             exit 1;
           fi
 
