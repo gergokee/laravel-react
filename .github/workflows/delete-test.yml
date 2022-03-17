@@ -22,6 +22,13 @@ jobs:
           echo "GITHUB_HEAD_REF:" $GITHUB_HEAD_REF
           echo "GITHUB_REF#refs/heads/": ${GITHUB_REF#refs/heads/}
           echo ${{ github.repository }}
+          gergokee/laravel-react
+          IP=$(curl --request GET \
+          --url https://api.github.com/repos/${{ github.repository_owner }}/${{ github.repository }}/environments \
+          --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+          --header 'content-type: application/json')
+          echo "$IP"
+          
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
