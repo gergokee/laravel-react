@@ -26,7 +26,7 @@ jobs:
           
           echo $ENVIRONMENTS
 
-          REVIEW_PROTECTED_PROD_ENV=`echo ${ENVIRONMENTS} | jq -r '.environments[]? | select(.name == "stage") | .protection_rules[]? | select(.type == "wait_timer")'`
+          REVIEW_PROTECTED_PROD_ENV=`echo ${ENVIRONMENTS} | jq -r '.environments[]? | select(.name == "production") | .protection_rules[]? | select(.type == "wait_timer")'`
           
           echo $REVIEW_PROTECTED_PROD_ENV
 
