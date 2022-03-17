@@ -30,7 +30,10 @@ jobs:
           
           echo $REVIEW_PROTECTED_PROD_ENV
 
-          echo "::set-output name=review_protected_prod_env::$REVIEW_PROTECTED_PROD_ENV"
+          if [ "$REVIEW_PROTECTED_PROD_ENVG" == "" ]; then
+            exit 1;
+          fi
+
           
       - name: Dump GitHub context
         env:
@@ -39,7 +42,6 @@ jobs:
           echo "$GITHUB_CONTEXT"
   test2:
     runs-on: ubuntu-18.04
-    if: needs.test.review_protected_prod_env
     outputs:
       job_status: ${{ job.status }}
     needs: [test]
